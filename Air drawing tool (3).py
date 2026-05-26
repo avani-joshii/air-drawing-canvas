@@ -1,10 +1,10 @@
-#with opacitied canvas, changeable colors, and lines that are smoother
+
 import cv2
 import mediapipe as mp
 import numpy as np
 
 cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)   # add these!
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)  
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(max_num_hands=2, min_detection_confidence=0.7)
@@ -50,13 +50,13 @@ while True:
                 y7  = int(hand_landmarks.landmark[7].y * h)
                 y12 = int(hand_landmarks.landmark[12].y * h)
                 fingers_right = count_fingers(hand_landmarks, h, w)
-                if y < y7:  # finger up → draw
+                if y < y7:  
                     if prev_x is not None and prev_y is not None:
                         
-                        cv2.line(canvas, (prev_x, prev_y), (x, y), color, 20)
-                    prev_x, prev_y = x, y  # always update
+                        cv2.line(canvas, (prev_x, prev_y), (x, y), color, 20) 
+                    prev_x, prev_y = x, y  
 
-                else:  # finger down → reset
+                else: 
                     prev_x, prev_y = None, None
                     if abs(y-y12)<70:  # erase
                         
